@@ -1,0 +1,14 @@
+!/bin/bash
+while read p; do
+  RES=$(curl -i "http://$p" &> /dev/stdout | head )
+  if [ "$?" = "0" ]; then
+    RES2=$(curl -i "http://$p" &> /dev/stdout | head | grep -E -i '^LOCATION')
+      if [ "$?" = "0" ]; then
+        echo "# REIDRECT: http://$p $(curl -i "http://$p" &> /dev/stdout | head | grep -E -i '^LOCATION')"
+      else
+        echo "# OK: http://$p"
+      fi
+   else
+     echo "# NOT FOUND: http://$p"
+   fi
+done
