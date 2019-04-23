@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 while read p; do
   RES=$(curl -i "http://$p" &> /dev/stdout | head )
   if [ "$?" = "0" ]; then
